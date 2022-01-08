@@ -21,6 +21,7 @@ module.exports = {
         NEAR_AMOUNT_TO_CONTRACT: 0
     },
     NEAR_NETWORK: {
+        // Need to change URL and CHAIN_ID to near protocol RPC URL and CHAIN_ID
         MAINNET: {
             NETWORK: "MAINNET",
             CHAIN_ID: 137,
