@@ -2,29 +2,29 @@ var assert = require('assert');
 const Web3 = require('web3')
 const tokenContract = require('./contract-json/TestToken.json');
 const CryptoJS = require('crypto-js');
-const NearKeyring = require('../src/index')
+const AuroraKeyring = require('../src/index')
 const {
     HD_WALLET_12_MNEMONIC,
     HD_WALLET_12_MNEMONIC_TEST_OTHER,
     TESTING_MESSAGE_1,
     TESTING_MESSAGE_2,
     TESTING_MESSAGE_3,
-    NEAR_NETWORK: {
+    AURORA_NETWORK: {
         TESTNET,
         MAINNET
     },
-    TRANSFER_NEAR: {
-        NEAR_AMOUNT,
-        NEAR_RECEIVER
+    TRANSFER_AURORA: {
+        AURORA_AMOUNT,
+        AURORA_RECEIVER
     },
     CONTRACT_TXN: {
-        NEAR_CONTRACT,
-        NEAR_AMOUNT_TO_CONTRACT
+        AURORA_CONTRACT,
+        AURORA_AMOUNT_TO_CONTRACT
     },
 } = require('./constants');
 
 const CONTRACT_MINT_PARAM = {
-    from: NEAR_CONTRACT,
+    from: AURORA_CONTRACT,
     to: '', // this will be the current account 
     amount: 1,
     nonce: 0,
@@ -60,60 +60,36 @@ const PASSWORD = "random_password"
  */
 
 describe('Initialize wallet ', () => {
-    const nearKeyring = new NearKeyring(opts)
+    const auroraKeyring = new AuroraKeyring(opts)
 
     it("Create new vault and keychain", async () => {
-        const res = await nearKeyring.createNewVaultAndKeychain(PASSWORD)
+        const res = await auroraKeyring.createNewVaultAndKeychain(PASSWORD)
         console.log("res ", res)
     })
 
     it("Create new vault and restore", async () => {
-        const res = await nearKeyring.createNewVaultAndRestore(PASSWORD, HD_WALLET_12_MNEMONIC)
-        assert(nearKeyring.keyrings[0].mnemonic === HD_WALLET_12_MNEMONIC, "Wrong mnemonic")
+        const res = await auroraKeyring.createNewVaultAndRestore(PASSWORD, HD_WALLET_12_MNEMONIC)
+        assert(auroraKeyring.keyrings[0].mnemonic === HD_WALLET_12_MNEMONIC, "Wrong mnemonic")
     })
 
     it("Export account (privateKey)", async () => {
-        const res = await nearKeyring.getAccounts()
+        const res = await auroraKeyring.getAccounts()
         let account = res[0]
-        const accRes = await nearKeyring.exportAccount(account)
+        const accRes = await auroraKeyring.exportAccount(account)
         console.log("accRes ", accRes, Buffer.from(accRes, 'hex'))
     })
 
     it("Get accounts", async () => {
-        const acc = await nearKeyring.getAccounts()
+        const acc = await auroraKeyring.getAccounts()
         console.log("acc ", acc)
     })
-
-    // it("Get fees", async () => {
-    //     const accounts = await nearKeyring.getAccounts()
-    //     const web3 = new Web3(TESTNET.URL);
-
-    //     const tokenContractNear = new web3.eth.Contract(
-    //         tokenContract.abi,
-    //         tokenContract.networks[`${TESTNET.CHAIN_ID}`].address
-    //     );
-
-    //     const txData = tokenContractNear.methods.mint(CONTRACT_MINT_PARAM.amount);
-    //     const data = txData.encodeABI();
-
-    //     const tx = {
-    //         from: accounts[0],
-    //         to: NEAR_CONTRACT,
-    //         value: NEAR_AMOUNT_TO_CONTRACT,
-    //         data
-    //     }
-
-    //     const fees = await nearKeyring.getFees(tx, web3)
-    //     console.log("fees ", fees)
-
-    // })
 
     it("Get fees with manual gasLimit", async () => {
         const web3 = new Web3(TESTNET.URL);
         const tx = {
             gasLimit: 2100
         }
-        const fees = await nearKeyring.getFees(tx, web3)
+        const fees = await auroraKeyring.getFees(tx, web3)
         console.log(" with manual gasLimit ", fees)
 
     })

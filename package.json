@@ -1,7 +1,7 @@
 {
-  "name": "@getsafle/vault-near-controller",
+  "name": "@getsafle/vault-aurora-controller",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aurora controller for safle vault.",
   "engines": {
     "node": ">= 10"
   },
@@ -13,18 +13,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getsafle/vault-near-controller.git"
+    "url": "git+https://github.com/getsafle/vault-aurora-controller.git"
   },
   "keywords": [
-    "near",
+    "aurora",
     "keyring"
   ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/getsafle/vault-near-controller/issues"
+    "url": "https://github.com/getsafle/vault-aurora-controller/issues"
   },
-  "homepage": "https://github.com/getsafle/vault-near-controller#readme",
+  "homepage": "https://github.com/getsafle/vault-aurora-controller#readme",
   "devDependencies": {
     "@metamask/eslint-config": "^4.0.0",
     "eslint": "^7.7.0",

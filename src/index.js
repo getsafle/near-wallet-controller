@@ -232,17 +232,17 @@ class KeyringController extends EventEmitter {
     //
 
     /**
-     * Sign Near Transaction
+     * Sign Aurora Transaction
      *
-     * Signs an Near transaction object.
+     * Signs an Aurora transaction object.
      *
-     * @param {Object} nearTx - The transaction to sign.
+     * @param {Object} auroraTx - The transaction to sign.
      * @param {Object} web3 - web3 object.
      * @returns {string} The signed transaction raw string.
      */
 
-    async signTransaction(nearTx, privateKey) {
-        const tx = new Tx(nearTx);
+    async signTransaction(auroraTx, privateKey) {
+        const tx = new Tx(auroraTx);
 
         const pkey = Buffer.from(privateKey, 'hex');
 
@@ -485,8 +485,8 @@ class KeyringController extends EventEmitter {
         }
     }
 
-    async getFees(nearTx, web3) {
-        const { from, to, value, data, gasLimit } = nearTx
+    async getFees(auroraTx, web3) {
+        const { from, to, value, data, gasLimit } = auroraTx
         const estimate = gasLimit ? gasLimit : await web3.eth.estimateGas({ to, from, value, data })
         const gasPrice = await web3.eth.getGasPrice();
         return { transactionFees: estimate * gasPrice }

@@ -1,15 +1,15 @@
-# vault-near-controller
+# vault-aurora-controller
 
 ## Install
 
-`npm install --save @getsafle/vault-near-controller`
+`npm install --save @getsafle/vault-aurora-controller`
 
-## Initialize the Near Controller class
+## Initialize the Aurora Controller class
 
 ```
-const controller = require('@getsafle/vault-near-controller');
+const controller = require('@getsafle/vault-aurora-controller');
 
-const nearController = new controller({
+const auroraController = new controller({
   encryptor: {
     // An optional object for defining encryption schemes:
     // Defaults to Browser-native SubtleCrypto.
@@ -28,41 +28,56 @@ const nearController = new controller({
 ### Generate Keyring with 1 account and encrypt
 
 ```
-const keyringState = await nearController.createNewVaultAndKeychain(password);
+const keyringState = await auroraController.createNewVaultAndKeychain(password);
 ```
 
 ### Restore a keyring with the first account using a mnemonic
 
 ```
-const keyringState = await nearController.createNewVaultAndRestore(password, mnemonic);
+const keyringState = await auroraController.createNewVaultAndRestore(password, mnemonic);
 ```
 
 ### Add a new account to the keyring object
 
 ```
-const keyringState = await nearController.addNewAccount(keyringObject);
+const keyringState = await auroraController.addNewAccount(keyringObject);
 ```
 
 ### Export the private key of an address present in the keyring
 
 ```
-const privateKey = await nearController.exportAccount(address);
+const privateKey = await auroraController.exportAccount(address);
 ```
 
 ### Sign a transaction
 
 ```
-const signedTx = await nearController.signTransaction(nearTx, _fromAddress);
+const signedTx = await auroraController.signTransaction(auroraTx, _fromAddress);
 ```
 
 ### Sign a message
 
 ```
-const signedMsg = await nearController.signMessage(msgParams);
+const signedMsg = await auroraController.signMessage(msgParams);
 ```
 
 ### Sign Typed Data (EIP-712)
 
 ```
-const signedData = await nearController.signTypedMessage (msgParams);
+const signedData = await auroraController.signTypedMessage (msgParams);
+```
+
+#### Raw transaction object
+
+```
+rawTx: {
+  to, // receiver address
+  from, // sender address
+  value, // amount to send
+  gas, // gas Limit of transaction
+  gasPrice, // gasPrice
+  data, // data in hex to send
+  nonce, // transaction nonce
+  chainId, // chainID | 1313161555 - TESTNET, 1313161554 - MAINNET
+}
 ```

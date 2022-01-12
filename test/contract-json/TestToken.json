@@ -1677,7 +1677,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 37,
-        "linearizedBaseContracts": [
+        "liauroraizedBaseContracts": [
           37
         ],
         "name": "TestToken",
@@ -2129,7 +2129,7 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 37,
-        "linearizedBaseContracts": [
+        "liauroraizedBaseContracts": [
           37
         ],
         "name": "TestToken",
