@@ -9,3 +9,9 @@
 ##### Change Near to Aurora Keyring
 
 - Aurora is the EVM compatible chain built on top of NEAR and thus changing Near to Aurora
+
+### 1.0.1 (2022-01-21)
+
+##### Implement import wallet functionality
+
+- Added importWallet() to import account using privateKey.
