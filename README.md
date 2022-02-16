@@ -64,7 +64,7 @@ const signedMsg = await auroraController.signMessage(msgParams);
 ### Sign Typed Data (EIP-712)
 
 ```
-const signedData = await auroraController.signTypedMessage (msgParams);
+const signedData = await auroraController.signTypedMessage(msgParams);
 ```
 
 #### Raw transaction object
@@ -80,4 +80,10 @@ rawTx: {
   nonce, // transaction nonce
   chainId, // chainID | 1313161555 - TESTNET, 1313161554 - MAINNET
 }
+```
+
+### Get balance
+
+```
+const balance = await getBalance(address, web3);
 ```
