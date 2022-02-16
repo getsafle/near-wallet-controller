@@ -7,9 +7,9 @@
 ## Initialize the Aurora Controller class
 
 ```
-const controller = require('@getsafle/vault-aurora-controller');
+const { KeyringController, getBalance } = require('@getsafle/vault-aurora-controller');
 
-const auroraController = new controller({
+const auroraController = new KeyringController({
   encryptor: {
     // An optional object for defining encryption schemes:
     // Defaults to Browser-native SubtleCrypto.
