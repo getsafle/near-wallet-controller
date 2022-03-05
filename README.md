@@ -7,9 +7,9 @@
 ## Initialize the Aurora Controller class
 
 ```
-const controller = require('@getsafle/vault-aurora-controller');
+const { KeyringController, getBalance } = require('@getsafle/vault-aurora-controller');
 
-const auroraController = new controller({
+const auroraController = new KeyringController({
   encryptor: {
     // An optional object for defining encryption schemes:
     // Defaults to Browser-native SubtleCrypto.
@@ -61,10 +61,16 @@ const signedTx = await auroraController.signTransaction(auroraTx, _fromAddress);
 const signedMsg = await auroraController.signMessage(msgParams);
 ```
 
+### Sign a message
+
+```
+const signedObj = await auroraController.sign(msgParams, pvtKey, web3Obj);
+```
+
 ### Sign Typed Data (EIP-712)
 
 ```
-const signedData = await auroraController.signTypedMessage (msgParams);
+const signedData = await auroraController.signTypedMessage(msgParams);
 ```
 
 #### Raw transaction object
@@ -80,4 +86,10 @@ rawTx: {
   nonce, // transaction nonce
   chainId, // chainID | 1313161555 - TESTNET, 1313161554 - MAINNET
 }
+```
+
+### Get balance
+
+```
+const balance = await getBalance(address, web3);
 ```

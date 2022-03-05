@@ -269,6 +269,25 @@ class KeyringController extends EventEmitter {
     }
 
     /**
+     * Sign Transaction or Message to get v,r,s
+     *
+     * Signs a transaction object.
+     *
+     * @param {Object} rawTx - The transaction or message to sign.
+     * @param {Object} privateKey - The private key of the account.
+     * @param {Object} web3 - web3 object.
+     * @returns {Object} The signed transaction object.
+     */
+    async sign(rawTx, privateKey, web3) {
+        let signedTx;
+        if (typeof rawTx === 'string')
+            signedTx = await web3.eth.accounts.sign(rawTx, privateKey);
+        else
+            signedTx = await web3.eth.accounts.signTransaction({ ...rawTx, gas: await web3.eth.estimateGas(rawTx) }, privateKey)
+        return signedTx
+    }
+
+    /**
      * Sign Message
      *
      * Attempts to sign the provided message parameters.
@@ -508,4 +527,9 @@ class KeyringController extends EventEmitter {
     }
 }
 
-module.exports = KeyringController
+const getBalance = async (address, web3) => {
+    const balance = await web3.eth.getBalance(address);
+    return { balance: web3.utils.fromWei(balance, 'ether') }
+}
+
+module.exports = { KeyringController, getBalance }

@@ -2,7 +2,8 @@ var assert = require('assert');
 const Web3 = require('web3')
 const tokenContract = require('./contract-json/TestToken.json');
 const CryptoJS = require('crypto-js');
-const AuroraKeyring = require('../src/index')
+const { KeyringController: AuroraKeyring, getBalance } = require('../src/index')
+
 const {
     HD_WALLET_12_MNEMONIC,
     HD_WALLET_12_MNEMONIC_TEST_OTHER,
@@ -90,18 +91,30 @@ describe('Initialize wallet ', () => {
     })
 
     it("Get fees with manual gasLimit", async () => {
+        const accounts = await auroraKeyring.getAccounts()
         const web3 = new Web3(TESTNET.URL);
         const tx = {
             gasLimit: 2100
         }
         const fees = await auroraKeyring.getFees(tx, web3)
         console.log(" with manual gasLimit ", fees)
+
+        const privateKey = await auroraKeyring.exportAccount(accounts[0])
+        const tx3 = await auroraKeyring.sign(TESTING_MESSAGE_1, privateKey, web3)
+        console.log("tx3 ", tx3)
     })
 
     it("Should import correct account ", async () => {
         const address = await auroraKeyring.importWallet(EXTERNAL_ACCOUNT_PRIVATE_KEY)
         assert(address.toLowerCase() === EXTERNAL_ACCOUNT_ADDRESS.toLowerCase(), "Wrong address")
         assert(auroraKeyring.importedWallets.length === 1, "Should have 1 imported wallet")
+    })
+
+    it("Get address balance", async () => {
+        const accounts = await auroraKeyring.getAccounts()
+        const web3 = new Web3(TESTNET.URL);
+        const balance = await getBalance(accounts[0], web3)
+        console.log(" get balance ", balance, accounts)
     })
 
 })
