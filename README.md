@@ -61,6 +61,12 @@ const signedTx = await auroraController.signTransaction(auroraTx, _fromAddress);
 const signedMsg = await auroraController.signMessage(msgParams);
 ```
 
+### Sign a message
+
+```
+const signedObj = await auroraController.sign(msgParams, pvtKey, web3Obj);
+```
+
 ### Sign Typed Data (EIP-712)
 
 ```
